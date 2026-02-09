@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # netstat is used to see open ports
 # -l only shows listening sockets
-# -p shows the PID and name of the program to which each socket belongs
+# -p shows the PID and program name each socket belongs
 netstat -l -p
