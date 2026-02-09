@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# displays all active IPv4 IPs on the machine it's executed on
+# displays all active IPv4 IPs on the machine it's executed on using ifconfig
+# grep seach for pattern matching IPv4 addresses
 ifconfig | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
