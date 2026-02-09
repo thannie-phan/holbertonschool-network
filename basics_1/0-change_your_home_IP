@@ -11,7 +11,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # stream editor to delete localhost+facebook, output in tmp file
-sed \ 
+sed \
   -e '/^127\.0\.0\.1[[:space:]]\+localhost/d' \
   -e '/facebook\.com/d' \
   "$HOSTS_FILE" > "$TMP_FILE"
