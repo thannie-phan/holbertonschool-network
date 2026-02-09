@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# configures an Ubuntu server with requirements
+
+HOSTS_FILE="/etc/hosts"
+TMP_FILE="/tmp/hosts.tmp"
+
+# if effective user id is not root dont run
+if [ "$EUID" -ne 0 ]; then
+  echo "please run as root"
+  exit 1
+fi
+
+# stream editor to delete localhost+facebook, output in tmp file
+sed \ 
+  -e '/^127\.0\.0\.1[[:space:]]\+localhost/d' \
+  -e '/facebook\.com/d' \
+  "$HOSTS_FILE" > "$TMP_FILE"
+
+
+# add mappings, append to tmp file
+echo "127.0.0.2 localhost" >> "$TMP_FILE"
+echo "8.8.8.8 facebook.com" >> "$TMP_FILE"
+
+# copy tmp file back to host file
+cp "$TMP_FILE" "$HOSTS_FILE"
